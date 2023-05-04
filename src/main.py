@@ -1,4 +1,6 @@
 import os
+import sys
+
 from pyrogram import Client
 from pyrogram.enums import ChatType
 from dotenv import load_dotenv
@@ -35,6 +37,9 @@ async def search_message_in_chats(target_user):
 
 
 if __name__ == '__main__':
-    target_user = ''
+    try:
+        target_user = sys.argv[1]
+    except IndexError:
+        target_user = input("Please enter target username: ")
 
     app.run(search_message_in_chats(target_user=target_user))
