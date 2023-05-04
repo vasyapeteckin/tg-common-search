@@ -6,7 +6,7 @@ def create_html(**kwargs):
     template = env.get_template('main.html')
     output_from_parsed_template = template.render(kwargs)
 
-    with open(f"{kwargs['target_user']}.html", "w", encoding="utf-8") as f:
+    with open(f"outputs/{kwargs['target_user']}.html", "w", encoding="utf-8") as f:
         f.write(output_from_parsed_template)
 
 

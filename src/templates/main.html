@@ -11,11 +11,18 @@
             <li>
                 <div>
                     <details>
-                        <summary><a href="https://t.me/{{ chat.username }}">{{ chat.title }}</a></summary>
+                        <summary><a href="https://t.me/{{ chat.username }}">{{ chat.title }} </a> Total: {{ chat.messages|length }}</summary>
                             <ul>
                                 {% for message in chat.messages %}
-                                    <li><a href="https://t.me/{{ chat.username }}/{{ message.id }}">{{ message.date }}</a> {{ message.text }}</li>
-
+                                    {% if chat.username %}
+                                        <li>
+                                            <a href="https://t.me/{{ chat.username }}/{{ message.id }}" target="_blank">{{ message.date }}</a> {{ message.text if message.text else message.service }}
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a href="https://t.me/c/{{ chat.id }}/{{ message.id }}" target="_blank">{{ message.date }}</a> {{ message.text if message.text else message.service }}
+                                        </li>
+                                    {% endif %}
                                 {% endfor %}
                             </ul>
                     </details>
