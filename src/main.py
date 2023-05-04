@@ -17,9 +17,10 @@ app = Client("my_account", api_id=api_id, api_hash=api_hash)
 async def search_message_in_chats(target_user):
     result = []
     async with app:
-        async for dialog in app.get_dialogs():
-            if dialog.chat.type == ChatType.SUPERGROUP:
-                chat_title, chat_id, chat_username = dialog.chat.first_name or dialog.chat.title, dialog.chat.id, dialog.chat.username
+        chats = await app.get_common_chats(target_user)
+        for chat in chats:
+            if chat.type == ChatType.SUPERGROUP:
+                chat_title, chat_id, chat_username = chat.first_name or chat.title, chat.id, chat.username
                 # print(chat_title, chat_username)
                 data = {'id': chat_id,
                         'title': chat_title,
@@ -34,6 +35,6 @@ async def search_message_in_chats(target_user):
 
 
 if __name__ == '__main__':
-    target_user = ''
+    target_user = 'VictorSilvaDM'
 
     app.run(search_message_in_chats(target_user=target_user))
