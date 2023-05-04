@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ target_user }}</title>
+</head>
+<body>
+
+    <ul>
+        {% for chat in chats %}
+            <li>
+                <div>
+                    <details>
+                        <summary><a href="https://t.me/{{ chat.username }}">{{ chat.title }}</a></summary>
+                            <ul>
+                                {% for message in chat.messages %}
+                                    <li><a href="https://t.me/{{ chat.username }}/{{ message.id }}">{{ message.date }}</a> {{ message.text }}</li>
+
+                                {% endfor %}
+                            </ul>
+                    </details>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
